@@ -2,5 +2,11 @@
 name = "oscy"
 version = "0.1.0"
 edition = "2024"
+authors = ["paramako <paramako@gmail.com>"]
+description = "Audio oscillators and waveform generation"
+license = "MIT"
+repository = "https://github.com/paramako/oscy"
+keywords = ["audio", "oscillator", "dsp", "synthesizer"]
+categories = ["multimedia::audio"]
 
 [dependencies]
