@@ -9,6 +9,15 @@
 /// for non-sine waveforms at higher frequencies.
 pub mod naive;
 
+/// Bandlimited oscillators using polynomial bandlimited step (polyBLEP).
+///
+/// PolyBLEP reduces aliasing by applying polynomial corrections to samples
+/// near waveform discontinuities. When a waveform has a sharp transition
+/// (like the reset in a sawtooth or edges in a square wave), the correction
+/// smooths samples within one sample period of the discontinuity, reducing
+/// high-frequency artifacts.
+pub mod poly_blep;
+
 /// A trait for audio oscillators that generate periodic waveforms.
 pub trait Oscillator {
     /// Sets the oscillator frequency in hertz.
