@@ -1,7 +1,7 @@
 use std::f32::consts::TAU;
 
-use crate::{Oscillator, Waveform};
 use super::NaiveOsc;
+use crate::{Oscillator, Waveform};
 
 const EPSILON: f32 = 1e-6;
 
@@ -14,10 +14,10 @@ fn test_sine_at_known_phases() {
     // 4 samples per cycle: phases 0.25, 0.5, 0.75, 0.0
     let mut osc = NaiveOsc::new(4.0, 1.0, Waveform::Sine);
 
-    assert!(approx_eq(osc.next_sample(), 1.0));  // sin(TAU * 0.25) = 1
-    assert!(approx_eq(osc.next_sample(), 0.0));  // sin(TAU * 0.5) = 0
+    assert!(approx_eq(osc.next_sample(), 1.0)); // sin(TAU * 0.25) = 1
+    assert!(approx_eq(osc.next_sample(), 0.0)); // sin(TAU * 0.5) = 0
     assert!(approx_eq(osc.next_sample(), -1.0)); // sin(TAU * 0.75) = -1
-    assert!(approx_eq(osc.next_sample(), 0.0));  // sin(TAU * 1.0) = 0
+    assert!(approx_eq(osc.next_sample(), 0.0)); // sin(TAU * 1.0) = 0
 }
 
 #[test]
@@ -26,8 +26,8 @@ fn test_saw_ramps_up() {
 
     // Saw: 2 * phase - 1, phases: 0.25, 0.5, 0.75, 0.0
     assert!(approx_eq(osc.next_sample(), -0.5)); // 2 * 0.25 - 1
-    assert!(approx_eq(osc.next_sample(), 0.0));  // 2 * 0.5 - 1
-    assert!(approx_eq(osc.next_sample(), 0.5));  // 2 * 0.75 - 1
+    assert!(approx_eq(osc.next_sample(), 0.0)); // 2 * 0.5 - 1
+    assert!(approx_eq(osc.next_sample(), 0.5)); // 2 * 0.75 - 1
     assert!(approx_eq(osc.next_sample(), -1.0)); // 2 * 0.0 - 1 (wrapped)
 }
 
@@ -36,10 +36,10 @@ fn test_square_alternates() {
     let mut osc = NaiveOsc::new(4.0, 1.0, Waveform::Square);
 
     // Square: 1 if phase < 0.5, else -1
-    assert!(approx_eq(osc.next_sample(), 1.0));  // phase 0.25
+    assert!(approx_eq(osc.next_sample(), 1.0)); // phase 0.25
     assert!(approx_eq(osc.next_sample(), -1.0)); // phase 0.5
     assert!(approx_eq(osc.next_sample(), -1.0)); // phase 0.75
-    assert!(approx_eq(osc.next_sample(), 1.0));  // phase 0.0 (wrapped)
+    assert!(approx_eq(osc.next_sample(), 1.0)); // phase 0.0 (wrapped)
 }
 
 #[test]
@@ -47,9 +47,9 @@ fn test_triangle_peaks_at_midpoint() {
     let mut osc = NaiveOsc::new(4.0, 1.0, Waveform::Triangle);
 
     // Triangle: ramps up to 1 at phase 0.5, then down to -1
-    assert!(approx_eq(osc.next_sample(), 0.0));  // 4 * 0.25 - 1 = 0
-    assert!(approx_eq(osc.next_sample(), 1.0));  // -4 * 0.5 + 3 = 1
-    assert!(approx_eq(osc.next_sample(), 0.0));  // -4 * 0.75 + 3 = 0
+    assert!(approx_eq(osc.next_sample(), 0.0)); // 4 * 0.25 - 1 = 0
+    assert!(approx_eq(osc.next_sample(), 1.0)); // -4 * 0.5 + 3 = 1
+    assert!(approx_eq(osc.next_sample(), 0.0)); // -4 * 0.75 + 3 = 0
     assert!(approx_eq(osc.next_sample(), -1.0)); // 4 * 0.0 - 1 = -1
 }
 

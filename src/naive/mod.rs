@@ -28,6 +28,7 @@ pub struct NaiveOsc {
 }
 
 impl NaiveOsc {
+    /// Creates a new naive oscillator.
     pub fn new(sample_rate: f32, frequency: f32, waveform: Waveform) -> Self {
         Self {
             phase: 0.0,
@@ -63,14 +64,20 @@ impl Oscillator for NaiveOsc {
         match self.waveform {
             Waveform::Sine => (self.phase * TAU).sin(),
             Waveform::Saw => 2.0 * self.phase - 1.0,
-            Waveform::Square => if self.phase < 0.5 { 1.0 } else { -1.0 },
+            Waveform::Square => {
+                if self.phase < 0.5 {
+                    1.0
+                } else {
+                    -1.0
+                }
+            }
             Waveform::Triangle => {
                 if self.phase < 0.5 {
                     4.0 * self.phase - 1.0
                 } else {
                     -4.0 * self.phase + 3.0
                 }
-            },
+            }
         }
     }
 }

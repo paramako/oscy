@@ -1,9 +1,9 @@
 [package]
 name = "oscy"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["paramako <paramako@gmail.com>"]
-description = "Audio oscillators and waveform generation"
+description = "Minimalistic Rust library for audio oscillators supporting common waveform shapes."
 license = "MIT"
 repository = "https://github.com/paramako/oscy"
 keywords = ["audio", "oscillator", "dsp", "synthesizer"]
