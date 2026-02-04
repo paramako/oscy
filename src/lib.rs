@@ -1,7 +1,8 @@
-//! A library for audio oscillators and waveform generation.
+//! A library for audio oscillators, waveform generation, and noise.
 //!
 //! Provides the [`Oscillator`] trait for building audio oscillators, along with
-//! ready-to-use implementations in submodules like [`naive`].
+//! ready-to-use implementations in [`naive`] and [`poly_blep`]. For noise
+//! generation, see the [`noise`] module (requires the `noise` feature).
 
 /// Naive oscillator implementations without anti-aliasing.
 ///
@@ -17,6 +18,13 @@ pub mod naive;
 /// smooths samples within one sample period of the discontinuity, reducing
 /// high-frequency artifacts.
 pub mod poly_blep;
+
+/// Noise generators for white, pink, and brown noise.
+///
+/// Noise generators produce aperiodic signals with different spectral
+/// characteristics. Unlike oscillators, they have no frequency or phase.
+#[cfg(feature = "noise")]
+pub mod noise;
 
 /// A trait for audio oscillators that generate periodic waveforms.
 pub trait Oscillator {

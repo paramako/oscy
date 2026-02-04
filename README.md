@@ -5,15 +5,15 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Changelog](https://img.shields.io/badge/changelog-md-blue)](CHANGELOG.md)
 
-A Rust library for audio oscillators and waveform generation.
+A Rust library for audio oscillators, waveform generation, and noise.
 
-## Oscillators
+## Sound sources
 
-| Oscillator | Description |
-|------------|-------------|
+| Source | Description |
+|--------|-------------|
 | `NaiveOsc` | Simple oscillator without anti-aliasing. Fast but produces aliasing at higher frequencies. |
 | `PolyBlepOsc` | Band-limited oscillator using polyBLEP for reduced aliasing. |
-| More | Additional implementations planned. |
+| `NoiseGen` | Noise generator with white, pink, and brown noise. Requires `noise` feature. |
 
 ## Usage
 
@@ -49,6 +49,23 @@ let mut naive = NaiveOsc::new(44100.0, 2000.0, Waveform::Saw);
 // PolyBLEP: smooths discontinuities to reduce aliasing
 let mut blep = PolyBlepOsc::new(44100.0, 2000.0, Waveform::Saw);
 ```
+
+### Noise generator
+
+Enable the `noise` feature in your `Cargo.toml`:
+
+```toml
+oscy = { version = "0.1", features = ["noise"] }
+```
+
+```rust
+use oscy::noise::NoiseGen;
+
+let mut noise = NoiseGen::pink();
+let samples: Vec<f32> = noise.take(1024).collect();
+```
+
+Available types: `white()`, `pink()`, `brown()`.
 
 ## Supported waveforms
 

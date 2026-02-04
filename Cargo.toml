@@ -1,6 +1,6 @@
 [package]
 name = "oscy"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["paramako <paramako@gmail.com>"]
 description = "Minimalistic Rust library for audio oscillators supporting common waveform shapes."
@@ -9,4 +9,9 @@ repository = "https://github.com/paramako/oscy"
 keywords = ["audio", "oscillator", "dsp", "synthesizer"]
 categories = ["multimedia::audio"]
 
+[features]
+default = []
+noise = ["dep:fastrand"]
+
 [dependencies]
+fastrand = { version = "2.3.0", optional = true }
